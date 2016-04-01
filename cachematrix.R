@@ -1,7 +1,10 @@
-## Put comments here that give an overall description of what your
-## functions do
+## These two functions work together to save computation
+## time.They allow a calculated value to be cached and retrieved
+## if necessary rather than continually recalculating it.
 
-## Write a short comment describing this function
+## This function creates a list of functions that 
+## will be called in the second function therefore
+## it must be passed as an argument to that function.
 
 makeCacheMatrix <- function(x = matrix()) {
 	m <- NULL
@@ -10,7 +13,7 @@ makeCacheMatrix <- function(x = matrix()) {
     m <<- NULL
   }
   get <- function() x
-  setinv <- function(solve) m <<- solve
+  setinv <- function(inverse) m <<- inverse
   getinv <- function() m
   list(set = set, get = get,
        setinv = setinv,
@@ -18,7 +21,12 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
+## This function calls functions defined in the
+## first function. It calculates the inverse of 
+## a matrix and then caches it so if it is asked
+## to calculate an inverse that it has previously
+## calculated it will simply retrieve it instead 
+## of recalculating it.
 
 cacheSolve <- function(x, ...) {
 	m <- x$getinv()
